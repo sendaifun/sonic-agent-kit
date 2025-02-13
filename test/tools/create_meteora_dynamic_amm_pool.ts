@@ -1,11 +1,11 @@
-import { SolanaAgentKit, createSolanaTools } from "../../src";
+import { SonicAgentKit, createSolanaTools } from "../../src";
 import { deploy_token } from "../../src/tools";
 import BN from "bn.js";
 import AmmImpl from "@mercurial-finance/dynamic-amm-sdk";
 import { deriveCustomizablePermissionlessConstantProductPoolAddress } from "@mercurial-finance/dynamic-amm-sdk/dist/cjs/src/amm/utils";
 import { METEORA_DYNAMIC_AMM_PROGRAM_ID } from "../../src/constants";
 
-const agent = new SolanaAgentKit(
+const agent = new SonicAgentKit(
   process.env.SOLANA_PRIVATE_KEY!,
   process.env.RPC_URL!,
   { OPENAI_API_KEY: process.env.OPENAI_API_KEY! },
@@ -67,4 +67,4 @@ async function main() {
 
 main();
 
-export { SolanaAgentKit, createSolanaTools };
+export { SonicAgentKit, createSolanaTools };

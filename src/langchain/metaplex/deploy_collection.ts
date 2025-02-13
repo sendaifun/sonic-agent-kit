@@ -1,5 +1,5 @@
 import { Tool } from "langchain/tools";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 
 export class SolanaDeployCollectionTool extends Tool {
   name = "solana_deploy_collection";
@@ -10,7 +10,7 @@ export class SolanaDeployCollectionTool extends Tool {
   uri: string, eg "https://example.com/collection.json" (required)
   royaltyBasisPoints?: number, eg 500 for 5% (optional)`;
 
-  constructor(private solanaKit: SolanaAgentKit) {
+  constructor(private sonicKit: SonicAgentKit) {
     super();
   }
 
@@ -18,7 +18,7 @@ export class SolanaDeployCollectionTool extends Tool {
     try {
       const parsedInput = JSON.parse(input);
 
-      const result = await this.solanaKit.deployCollection(parsedInput);
+      const result = await this.sonicKit.deployCollection(parsedInput);
 
       return JSON.stringify({
         status: "success",

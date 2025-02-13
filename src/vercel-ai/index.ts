@@ -1,10 +1,10 @@
 import { tool, type CoreTool } from "ai";
-import { SolanaAgentKit } from "../agent";
+import { SonicAgentKit } from "../agent";
 import { executeAction } from "../utils/actionExecutor";
 import { ACTIONS } from "../actions";
 
-export function createSolanaTools(
-  solanaAgentKit: SolanaAgentKit,
+export function createSonicTools(
+  sonicAgentKit: SonicAgentKit,
 ): Record<string, CoreTool> {
   const tools: Record<string, CoreTool> = {};
   const actionKeys = Object.keys(ACTIONS);
@@ -12,20 +12,19 @@ export function createSolanaTools(
   for (const key of actionKeys) {
     const action = ACTIONS[key as keyof typeof ACTIONS];
     tools[key] = tool({
-      // @ts-expect-error Value matches type however TS still shows error
-      id: action.name,
+      id: action.name as `${string}.${string}`,
       description: `
       ${action.description}
 
       Similes: ${action.similes.map(
-        (simile) => `
-        ${simile}
+        (simile: string) => `
+        ${simile} 
       `,
       )}
       `.slice(0, 1023),
       parameters: action.schema,
       execute: async (params) =>
-        await executeAction(action, solanaAgentKit, params),
+        await executeAction(action, sonicAgentKit, params),
     });
   }
 

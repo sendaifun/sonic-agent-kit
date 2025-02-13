@@ -1,4 +1,4 @@
-import { SolanaAgentKit } from "../../index";
+import { SonicAgentKit } from "../../index";
 import { PublicKey } from "@solana/web3.js";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { generateSigner, keypairIdentity } from "@metaplex-foundation/umi";
@@ -16,7 +16,7 @@ import { mplToolbox } from "@metaplex-foundation/mpl-toolbox";
 
 /**
  * Deploy a new SPL token
- * @param agent SolanaAgentKit instance
+ * @param agent SonicAgentKit instance
  * @param name Name of the token
  * @param uri URI for the token metadata
  * @param symbol Symbol of the token
@@ -25,7 +25,7 @@ import { mplToolbox } from "@metaplex-foundation/mpl-toolbox";
  * @returns Object containing token mint address and initial account (if supply was minted)
  */
 export async function deploy_token(
-  agent: SolanaAgentKit,
+  agent: SonicAgentKit,
   name: string,
   uri: string,
   symbol: string,

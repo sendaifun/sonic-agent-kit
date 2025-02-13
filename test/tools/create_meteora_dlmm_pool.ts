@@ -1,7 +1,7 @@
-import { SolanaAgentKit, createSolanaTools } from "../../src";
+import { SonicAgentKit, createSolanaTools } from "../../src";
 import { deploy_token } from "../../src/tools";
 
-const agent = new SolanaAgentKit(
+const agent = new SonicAgentKit(
   process.env.SOLANA_PRIVATE_KEY!,
   process.env.RPC_URL!,
   { OPENAI_API_KEY: process.env.OPENAI_API_KEY! },
@@ -56,4 +56,4 @@ async function main() {
 
 main();
 
-export { SolanaAgentKit, createSolanaTools };
+export { SonicAgentKit, createSolanaTools };

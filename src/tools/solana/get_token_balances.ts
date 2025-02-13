@@ -1,16 +1,16 @@
 import { LAMPORTS_PER_SOL, type PublicKey } from "@solana/web3.js";
-import type { SolanaAgentKit } from "../../index";
+import type { SonicAgentKit } from "../../index";
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { getTokenMetadata } from "../../utils/tokenMetadata";
 
 /**
  * Get the token balances of a Solana wallet
- * @param agent - SolanaAgentKit instance
+ * @param agent - SonicAgentKit instance
  * @param token_address - Optional SPL token mint address. If not provided, returns SOL balance
  * @returns Promise resolving to the balance as an object containing sol balance and token balances with their respective mints, symbols, names and decimals
  */
 export async function get_token_balance(
-  agent: SolanaAgentKit,
+  agent: SonicAgentKit,
   walletAddress?: PublicKey,
 ): Promise<{
   sol: number;

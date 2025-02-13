@@ -1,5 +1,5 @@
 import { Action } from "../../types/action";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 import { z } from "zod";
 import { get_wallet_address } from "../../tools/agent";
 
@@ -20,7 +20,7 @@ const getWalletAddressAction: Action = {
     ],
   ],
   schema: z.object({}),
-  handler: async (agent: SolanaAgentKit) => ({
+  handler: async (agent: SonicAgentKit) => ({
     status: "success",
     address: get_wallet_address(agent),
   }),

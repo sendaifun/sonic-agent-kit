@@ -5,9 +5,9 @@ import {
 } from "@3land/listings-sdk/dist/types/implementation/implementationTypes";
 
 import "dotenv/config";
-import { SolanaAgentKit, createSolanaTools } from "../../src";
+import { SonicAgentKit, createSolanaTools } from "../../src";
 
-const agent = new SolanaAgentKit(
+const agent = new SonicAgentKit(
   process.env.SOLANA_PRIVATE_KEY!,
   process.env.RPC_URL!,
   { OPENAI_API_KEY: process.env.OPENAI_API_KEY! },
@@ -65,4 +65,4 @@ const withPool = true;
   console.log("result: ", result);
 })();
 
-export { SolanaAgentKit, createSolanaTools };
+export { SonicAgentKit, createSolanaTools };

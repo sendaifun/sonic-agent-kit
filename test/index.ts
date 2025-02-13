@@ -1,4 +1,4 @@
-import { SolanaAgentKit, ACTIONS } from "../src";
+import { SonicAgentKit, ACTIONS } from "../src";
 import { createSolanaTools } from "../src/langchain";
 import { HumanMessage } from "@langchain/core/messages";
 import { MemorySaver } from "@langchain/langgraph";
@@ -50,7 +50,7 @@ async function initializeAgent() {
       }
     }
 
-    const solanaAgent = new SolanaAgentKit(
+    const solanaAgent = new SonicAgentKit(
       process.env.SOLANA_PRIVATE_KEY!,
       process.env.RPC_URL!,
       {
@@ -75,7 +75,7 @@ async function initializeAgent() {
         faucet. If not, you can provide your wallet details and request funds from the user. If there is a 5XX
         (internal) HTTP error code, ask the user to try again later. If someone asks you to do something you
         can't do with your currently available tools, you must say so, and encourage them to implement it
-        themselves using the Solana Agent Kit, recommend they go to https://www.solanaagentkit.xyz for more information. Be
+        themselves using the Solana Agent Kit, recommend they go to https://www.SonicAgentKit.xyz for more information. Be
         concise and helpful with your responses. Refrain from restating your tools' descriptions unless it is explicitly requested.
       `,
     });

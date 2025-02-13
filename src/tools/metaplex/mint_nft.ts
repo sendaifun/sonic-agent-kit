@@ -1,4 +1,4 @@
-import { SolanaAgentKit } from "../../index";
+import { SonicAgentKit } from "../../index";
 import { generateSigner, keypairIdentity } from "@metaplex-foundation/umi";
 import { create, mplCore } from "@metaplex-foundation/mpl-core";
 import { fetchCollection } from "@metaplex-foundation/mpl-core";
@@ -13,14 +13,14 @@ import { MintCollectionNFTResponse } from "../../types";
 
 /**
  * Mint a new NFT as part of an existing collection
- * @param agent SolanaAgentKit instance
+ * @param agent SonicAgentKit instance
  * @param collectionMint Address of the collection's master NFT
  * @param metadata NFT metadata object
  * @param recipient Optional recipient address (defaults to wallet address)
  * @returns Object containing NFT mint address and token account
  */
 export async function mintCollectionNFT(
-  agent: SolanaAgentKit,
+  agent: SonicAgentKit,
   collectionMint: PublicKey,
   metadata: {
     name: string;

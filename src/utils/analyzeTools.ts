@@ -1,9 +1,9 @@
 import { encoding_for_model, TiktokenModel } from "tiktoken";
-import { SolanaAgentKit } from "../index";
+import { SonicAgentKit } from "../index";
 import * as dotenv from "dotenv";
 import { ACTIONS, Action } from "../actions/index";
-import { createSolanaTools as getLangchainTools } from "../langchain/index";
-import { createSolanaTools as getVercelTools } from "../vercel-ai/index";
+import { createSonicTools as getLangchainTools } from "../langchain/index";
+import { createSonicTools as getVercelTools } from "../vercel-ai/index";
 import { type CoreTool } from "ai";
 import { Tool } from "langchain/tools";
 
@@ -63,7 +63,7 @@ export async function analyzeToolTokens(
 ): Promise<ToolAnalysis[]> {
   const enc = encoding_for_model(modelName);
 
-  const solanaAgentKit = new SolanaAgentKit(
+  const sonicAgentKit = new SonicAgentKit(
     process.env.SOLANA_PRIVATE_KEY! || "",
     process.env.RPC_URL! || "",
     { OPENAI_API_KEY: process.env.OPENAI_API_KEY! || "" },
@@ -81,7 +81,7 @@ export async function analyzeToolTokens(
 
   // Only load Langchain tools if flag is set
   if (includeLangchain) {
-    const langchainTools = getLangchainTools(solanaAgentKit) as Tool[];
+    const langchainTools = getLangchainTools(sonicAgentKit) as Tool[];
 
     langchainTools.forEach((tool) => {
       toolMap.set(tool.name, {
@@ -91,7 +91,7 @@ export async function analyzeToolTokens(
       });
     });
   } else {
-    const vercelTools = getVercelTools(solanaAgentKit);
+    const vercelTools = getVercelTools(sonicAgentKit);
 
     Object.keys(ACTIONS).forEach((toolName) => {
       toolMap.set(toolName, {

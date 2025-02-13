@@ -1,8 +1,8 @@
 import { sendAndConfirmTransaction, Transaction } from "@solana/web3.js";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 
 export async function rock_paper_scissor(
-  agent: SolanaAgentKit,
+  agent: SonicAgentKit,
   amount: number,
   choice: "rock" | "paper" | "scissors",
 ) {
@@ -44,7 +44,7 @@ export async function rock_paper_scissor(
   }
 }
 async function outcome(
-  agent: SolanaAgentKit,
+  agent: SonicAgentKit,
   sig: string,
   href: string,
 ): Promise<string> {
@@ -75,7 +75,7 @@ async function outcome(
     throw new Error(`RPS outcome failed: ${error.message}`);
   }
 }
-async function won(agent: SolanaAgentKit, href: string): Promise<string> {
+async function won(agent: SonicAgentKit, href: string): Promise<string> {
   try {
     const res = await fetch(
       "https://rps.sendarcade.fun" + href, // href = /api/actions/won?id=...
@@ -107,7 +107,7 @@ async function won(agent: SolanaAgentKit, href: string): Promise<string> {
     throw new Error(`RPS outcome failed: ${error.message}`);
   }
 }
-async function postWin(agent: SolanaAgentKit, href: string): Promise<string> {
+async function postWin(agent: SonicAgentKit, href: string): Promise<string> {
   try {
     const res = await fetch(
       "https://rps.sendarcade.fun" + href, // href = /api/actions/postwin?id=...

@@ -1,5 +1,5 @@
 import { Action } from "../../types/action";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 import { z } from "zod";
 import { closeEmptyTokenAccounts } from "../../tools";
 
@@ -40,7 +40,7 @@ const closeEmptyTokenAccountsAction: Action = {
     ],
   ],
   schema: z.object({}),
-  handler: async (agent: SolanaAgentKit) => {
+  handler: async (agent: SonicAgentKit) => {
     try {
       const result = await closeEmptyTokenAccounts(agent);
 

@@ -1,4 +1,4 @@
-import { SolanaAgentKit } from "../../index";
+import { SonicAgentKit } from "../../index";
 import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import {
@@ -11,14 +11,14 @@ import {
 
 /**
  * Transfer SOL or SPL tokens to a recipient
- * @param agent SolanaAgentKit instance
+ * @param agent SonicAgentKit instance
  * @param to Recipient's public key
  * @param amount Amount to transfer
  * @param mint Optional mint address for SPL tokens
  * @returns Transaction signature
  */
 export async function transfer(
-  agent: SolanaAgentKit,
+  agent: SonicAgentKit,
   to: PublicKey,
   amount: number,
   mint?: PublicKey,

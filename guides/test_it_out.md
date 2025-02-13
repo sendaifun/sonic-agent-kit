@@ -49,9 +49,9 @@ The project includes a test script located at `test/index.ts`. To execute the te
 
 ### Token Deployment
 ```typescript
-import { SolanaAgentKit } from "solana-agent-kit";
+import { SonicAgentKit } from "solana-agent-kit";
 
-const agent = new SolanaAgentKit("your_private_key");
+const agent = new SonicAgentKit("your_private_key");
 
 const result = await agent.deployToken(
   9, // decimals
@@ -62,9 +62,9 @@ console.log("Token Mint Address:", result.mint.toString());
 
 ### NFT Collection Creation
 ```typescript
-import { SolanaAgentKit } from "solana-agent-kit";
+import { SonicAgentKit } from "solana-agent-kit";
 
-const agent = new SolanaAgentKit("your_private_key");
+const agent = new SonicAgentKit("your_private_key");
 
 const collection = await agent.deployCollection({
   name: "My NFT Collection",

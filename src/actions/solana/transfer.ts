@@ -1,6 +1,6 @@
 import { PublicKey } from "@solana/web3.js";
 import { Action } from "../../types/action";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 import { z } from "zod";
 import { transfer } from "../../tools";
 
@@ -58,7 +58,7 @@ const transferAction: Action = {
     amount: z.number().positive("Amount must be positive"),
     mint: z.string().optional(),
   }),
-  handler: async (agent: SolanaAgentKit, input: Record<string, any>) => {
+  handler: async (agent: SonicAgentKit, input: Record<string, any>) => {
     const recipient = new PublicKey(input.to);
     const mintAddress = input.mint ? new PublicKey(input.mint) : undefined;
 

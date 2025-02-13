@@ -1,18 +1,18 @@
 import { Tool } from "langchain/tools";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 
 export class SolanaCloseEmptyTokenAccounts extends Tool {
   name = "close_empty_token_accounts";
   description = `Close all empty spl-token accounts and reclaim the rent`;
 
-  constructor(private solanaKit: SolanaAgentKit) {
+  constructor(private sonicKit: SonicAgentKit) {
     super();
   }
 
   protected async _call(): Promise<string> {
     try {
       const { signature, size } =
-        await this.solanaKit.closeEmptyTokenAccounts();
+        await this.sonicKit.closeEmptyTokenAccounts();
 
       return JSON.stringify({
         status: "success",

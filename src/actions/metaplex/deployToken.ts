@@ -1,5 +1,5 @@
 import { Action } from "../../types/action";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 import { z } from "zod";
 import { deploy_token } from "../../tools";
 
@@ -55,7 +55,7 @@ const deployTokenAction: Action = {
     decimals: z.number().optional(),
     initialSupply: z.number().optional(),
   }),
-  handler: async (agent: SolanaAgentKit, input: Record<string, any>) => {
+  handler: async (agent: SonicAgentKit, input: Record<string, any>) => {
     try {
       const result = await deploy_token(
         agent,

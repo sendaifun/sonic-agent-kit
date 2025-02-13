@@ -1,6 +1,6 @@
 import { PublicKey } from "@solana/web3.js";
 import { Tool } from "langchain/tools";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 
 export class SolanaTransferTool extends Tool {
   name = "solana_transfer";
@@ -11,7 +11,7 @@ export class SolanaTransferTool extends Tool {
   amount: number, eg 1 (required)
   mint?: string, eg "So11111111111111111111111111111111111111112" or "SENDdRQtYMWaQrBroBrJ2Q53fgVuq95CV9UPGEvpCxa" (optional)`;
 
-  constructor(private solanaKit: SolanaAgentKit) {
+  constructor(private sonicKit: SonicAgentKit) {
     super();
   }
 
@@ -24,7 +24,7 @@ export class SolanaTransferTool extends Tool {
         ? new PublicKey(parsedInput.mint)
         : undefined;
 
-      const tx = await this.solanaKit.transfer(
+      const tx = await this.sonicKit.transfer(
         recipient,
         parsedInput.amount,
         mintAddress,

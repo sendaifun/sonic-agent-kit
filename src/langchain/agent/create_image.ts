@@ -1,5 +1,5 @@
 import { Tool } from "langchain/tools";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 import { create_image } from "../../tools/agent";
 
 export class SolanaCreateImageTool extends Tool {
@@ -7,7 +7,7 @@ export class SolanaCreateImageTool extends Tool {
   description =
     "Create an image using OpenAI's DALL-E. Input should be a string prompt for the image.";
 
-  constructor(private solanaKit: SolanaAgentKit) {
+  constructor(private sonicKit: SonicAgentKit) {
     super();
   }
 
@@ -20,7 +20,7 @@ export class SolanaCreateImageTool extends Tool {
   protected async _call(input: string): Promise<string> {
     try {
       this.validateInput(input);
-      const result = await create_image(this.solanaKit, input.trim());
+      const result = await create_image(this.sonicKit, input.trim());
 
       return JSON.stringify({
         status: "success",

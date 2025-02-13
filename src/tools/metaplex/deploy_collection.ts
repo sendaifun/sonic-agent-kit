@@ -1,4 +1,4 @@
-import { SolanaAgentKit } from "../../index";
+import { SonicAgentKit } from "../../index";
 import {
   generateSigner,
   keypairIdentity,
@@ -18,12 +18,12 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 
 /**
  * Deploy a new NFT collection
- * @param agent SolanaAgentKit instance
+ * @param agent SonicAgentKit instance
  * @param options Collection options including name, URI, royalties, and creators
  * @returns Object containing collection address and metadata
  */
 export async function deploy_collection(
-  agent: SolanaAgentKit,
+  agent: SonicAgentKit,
   options: CollectionOptions,
 ): Promise<CollectionDeployment> {
   try {

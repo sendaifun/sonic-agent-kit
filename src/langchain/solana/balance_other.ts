@@ -1,6 +1,6 @@
 import { PublicKey } from "@solana/web3.js";
 import { Tool } from "langchain/tools";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 
 export class SolanaBalanceOtherTool extends Tool {
   name = "solana_balance_other";
@@ -12,7 +12,7 @@ export class SolanaBalanceOtherTool extends Tool {
   walletAddress: string, eg "GDEkQF7UMr7RLv1KQKMtm8E2w3iafxJLtyXu3HVQZnME" (required)
   tokenAddress: string, eg "SENDdRQtYMWaQrBroBrJ2Q53fgVuq95CV9UPGEvpCxa" (optional)`;
 
-  constructor(private solanaKit: SolanaAgentKit) {
+  constructor(private sonicKit: SonicAgentKit) {
     super();
   }
 
@@ -23,7 +23,7 @@ export class SolanaBalanceOtherTool extends Tool {
         ? new PublicKey(tokenAddress)
         : undefined;
 
-      const balance = await this.solanaKit.getBalanceOther(
+      const balance = await this.sonicKit.getBalanceOther(
         new PublicKey(walletAddress),
         tokenPubKey,
       );

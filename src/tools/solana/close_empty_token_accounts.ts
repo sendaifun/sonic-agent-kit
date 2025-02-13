@@ -3,7 +3,7 @@ import {
   Transaction,
   TransactionInstruction,
 } from "@solana/web3.js";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 import {
   AccountLayout,
   createCloseAccountInstruction,
@@ -13,11 +13,11 @@ import {
 
 /**
  * Close Empty SPL Token accounts of the agent
- * @param agent SolanaAgentKit instance
+ * @param agent SonicAgentKit instance
  * @returns transaction signature and total number of accounts closed
  */
 export async function closeEmptyTokenAccounts(
-  agent: SolanaAgentKit,
+  agent: SonicAgentKit,
 ): Promise<{ signature: string; size: number }> {
   try {
     const spl_token = await create_close_instruction(agent, TOKEN_PROGRAM_ID);
@@ -58,13 +58,13 @@ export async function closeEmptyTokenAccounts(
 
 /**
  * creates the close instuctions of a spl token account
- * @param agnet SolanaAgentKit instance
+ * @param agnet SonicAgentKit instance
  * @param token_program Token Program Id
  * @returns close instuction array
  */
 
 async function create_close_instruction(
-  agent: SolanaAgentKit,
+  agent: SonicAgentKit,
   token_program: PublicKey,
 ): Promise<TransactionInstruction[]> {
   const instructions = [];

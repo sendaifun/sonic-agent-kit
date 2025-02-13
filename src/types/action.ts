@@ -1,4 +1,4 @@
-import { SolanaAgentKit } from "../agent";
+import { SonicAgentKit } from "../agent";
 import { z } from "zod";
 
 /**
@@ -14,7 +14,7 @@ export interface ActionExample {
  * Handler function type for executing the action
  */
 export type Handler = (
-  agent: SolanaAgentKit,
+  agent: SonicAgentKit,
   input: Record<string, any>,
 ) => Promise<Record<string, any>>;
 

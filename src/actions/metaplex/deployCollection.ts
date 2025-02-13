@@ -1,5 +1,5 @@
 import { Action } from "../../types/action";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 import { z } from "zod";
 import { deploy_collection } from "../../tools/metaplex";
 
@@ -57,7 +57,7 @@ const deployCollectionAction: Action = {
     uri: z.string().url("URI must be a valid URL"),
     royaltyBasisPoints: z.number().min(0).max(10000).optional(),
   }),
-  handler: async (agent: SolanaAgentKit, input: Record<string, any>) => {
+  handler: async (agent: SonicAgentKit, input: Record<string, any>) => {
     const options: CollectionOptions = {
       name: input.name,
       uri: input.uri,

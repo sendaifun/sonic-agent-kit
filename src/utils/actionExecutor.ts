@@ -1,5 +1,5 @@
 import { Action } from "../types/action";
-import { SolanaAgentKit } from "../agent";
+import { SonicAgentKit } from "../agent";
 import { ACTIONS } from "../actions";
 
 /**
@@ -10,7 +10,7 @@ export function findAction(query: string): Action | undefined {
   return Object.values(ACTIONS).find(
     (action) =>
       action.name.toLowerCase() === normalizedQuery ||
-      action.similes.some((simile) => simile.toLowerCase() === normalizedQuery),
+      action.similes.some((simile: string) => simile.toLowerCase() === normalizedQuery),
   );
 }
 
@@ -19,7 +19,7 @@ export function findAction(query: string): Action | undefined {
  */
 export async function executeAction(
   action: Action,
-  agent: SolanaAgentKit,
+  agent: SonicAgentKit,
   input: Record<string, any>,
 ): Promise<Record<string, any>> {
   try {

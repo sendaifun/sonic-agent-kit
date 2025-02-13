@@ -1,5 +1,5 @@
 import { Tool } from "langchain/tools";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 
 export class SolanaDeployTokenTool extends Tool {
   name = "solana_deploy_token";
@@ -12,7 +12,7 @@ export class SolanaDeployTokenTool extends Tool {
   decimals?: number, eg 9 (optional, defaults to 9)
   initialSupply?: number, eg 1000000 (optional)`;
 
-  constructor(private solanaKit: SolanaAgentKit) {
+  constructor(private sonicKit: SonicAgentKit) {
     super();
   }
 
@@ -20,7 +20,7 @@ export class SolanaDeployTokenTool extends Tool {
     try {
       const parsedInput = JSON.parse(input);
 
-      const result = await this.solanaKit.deployToken(
+      const result = await this.sonicKit.deployToken(
         parsedInput.name,
         parsedInput.uri,
         parsedInput.symbol,

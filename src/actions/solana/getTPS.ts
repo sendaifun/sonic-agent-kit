@@ -1,5 +1,5 @@
 import { Action } from "../../types/action";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 import { z } from "zod";
 import { getTPS } from "../../tools/solana";
 
@@ -28,7 +28,7 @@ const getTPSAction: Action = {
     ],
   ],
   schema: z.object({}), // No input parameters required
-  handler: async (agent: SolanaAgentKit, _input: Record<string, any>) => {
+  handler: async (agent: SonicAgentKit, _input: Record<string, any>) => {
     try {
       const response = await getTPS(agent);
       return {

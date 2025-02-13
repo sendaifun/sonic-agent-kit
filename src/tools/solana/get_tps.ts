@@ -1,6 +1,6 @@
-import { SolanaAgentKit } from "../../index";
+import { SonicAgentKit } from "../../index";
 
-export async function getTPS(agent: SolanaAgentKit): Promise<number> {
+export async function getTPS(agent: SonicAgentKit): Promise<number> {
   const perfSamples = await agent.connection.getRecentPerformanceSamples();
 
   if (

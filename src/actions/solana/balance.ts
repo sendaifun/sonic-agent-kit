@@ -1,6 +1,6 @@
 import { PublicKey } from "@solana/web3.js";
 import type { Action } from "../../types/action";
-import type { SolanaAgentKit } from "../../agent";
+import type { SonicAgentKit } from "../../agent";
 import { z } from "zod";
 import { get_balance } from "../../tools";
 
@@ -45,7 +45,7 @@ const balanceAction: Action = {
   schema: z.object({
     tokenAddress: z.string().optional(),
   }),
-  handler: async (agent: SolanaAgentKit, input: Record<string, any>) => {
+  handler: async (agent: SonicAgentKit, input: Record<string, any>) => {
     const balance = await get_balance(
       agent,
       input.tokenAddress && new PublicKey(input.tokenAddress),

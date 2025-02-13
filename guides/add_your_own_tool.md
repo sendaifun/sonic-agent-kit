@@ -6,7 +6,7 @@ Extending the **Solana Agent Kit** with custom tools allows you to add specializ
 
 1. Create a new tool file
 2. Export the new tool
-3. Add supporting functions in SolanaAgentKit
+3. Add supporting functions in SonicAgentKit
 4. Implement the Langchain tool class
 5. Export the Langchain tool
 6. Export your protocol's langchain tools (if not already exported)
@@ -28,10 +28,10 @@ export * from "./jupiter";
 export * from "./your_protocol"; // Add your protocol here if it's not already in the list
 ```
 
-### 3. Add Supporting Functions to SolanaAgentKit
+### 3. Add Supporting Functions to SonicAgentKit
 > `src/agent/index.ts`
 ```typescript:src/agent/index.ts
-export class SolanaAgentKit {
+export class SonicAgentKit {
   // ... existing code ...
 
   async customFunction(input: string): Promise<string> {
@@ -45,19 +45,19 @@ export class SolanaAgentKit {
 > `src/langchain/your_protocol/custom_tool.ts`
 ```typescript:src/langchain/your_protocol/custom_tool.ts
 import { Tool } from "langchain/tools";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 
 export class CustomTool extends Tool {
   name = "custom_tool";
   description = "Description of what the custom tool does.";
 
-  constructor(private solanaKit: SolanaAgentKit) {
+  constructor(private sonicKit: SonicAgentKit) {
     super();
   }
 
   protected async _call(input: string): Promise<string> {
     try {
-      const result = await this.solanaKit.customFunction(input);
+      const result = await this.sonicKit.customFunction(input);
       return JSON.stringify({
         status: "success",
         message: "Custom tool executed successfully",
@@ -92,7 +92,7 @@ export * from "./your_protocol"; // Add your protocol here if it's not already i
 > `src/actions/your_protocol/custom_action.ts`
 ```typescript:src/actions/your_protocol/custom_action.ts
 import { Action } from "../../types/action";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 import { z } from "zod";
 import { custom_tool } from "../../tools";
 
@@ -114,7 +114,7 @@ const customAction: Action = {
   schema: z.object({
     input: z.string(),
   }),
-  handler: async (agent: SolanaAgentKit, input: Record<string, any>) => {
+  handler: async (agent: SonicAgentKit, input: Record<string, any>) => {
     const result = await agent.customFunction(input);
     return result;
   },
@@ -137,9 +137,9 @@ export const ACTIONS = {
 Add a code example in the `README.md` file.
 
 ```typescript
-import { SolanaAgentKit, createSolanaTools } from "solana-agent-kit";
+import { SonicAgentKit, createSolanaTools } from "solana-agent-kit";
 
-const agent = new SolanaAgentKit(
+const agent = new SonicAgentKit(
   "your-wallet-private-key-as-base58",
   "https://api.mainnet-beta.solana.com",
   "your-openai-api-key"
@@ -154,7 +154,7 @@ if (customTool) {
 }
 
 // or alternatively
-const result = await agent.customFunction("your-input"); // assuming you have implemented `customFunction` method in SolanaAgentKit
+const result = await agent.customFunction("your-input"); // assuming you have implemented `customFunction` method in SonicAgentKit
 console.log(result);
 ```
 
@@ -172,19 +172,19 @@ Here's a complete example of implementing a tool to fetch token prices:
 > `src/tools/fetch_token_price.ts`
 ```typescript:src/tools/fetch_token_price.ts
 import { Tool } from "langchain/tools";
-import { SolanaAgentKit } from "../agent";
+import { SonicAgentKit } from "../agent";
 
 export class FetchTokenPriceTool extends Tool {
   name = "fetch_token_price";
   description = "Fetches the current price of a specified token.";
 
-  constructor(private solanaKit: SolanaAgentKit) {
+  constructor(private sonicKit: SonicAgentKit) {
     super();
   }
 
   protected async _call(tokenSymbol: string): Promise<string> {
     try {
-      const price = await this.solanaKit.getTokenPrice(tokenSymbol);
+      const price = await this.sonicKit.getTokenPrice(tokenSymbol);
       return JSON.stringify({
         status: "success",
         message: `Price fetched successfully for ${tokenSymbol}.`,
@@ -201,10 +201,10 @@ export class FetchTokenPriceTool extends Tool {
 }
 ```
 
-Add the supporting function to SolanaAgentKit:
+Add the supporting function to SonicAgentKit:
 > `src/agent/index.ts`
 ```typescript:src/agent/index.ts
-export class SolanaAgentKit {
+export class SonicAgentKit {
   async getTokenPrice(tokenSymbol: string): Promise<number> {
     const mockPrices: { [key: string]: number } = {
       SOL: 150,
@@ -226,7 +226,7 @@ Add Action for given tool:
 > `src/actions/fetch_token_price.ts`
 ```typescript:src/actions/fetch_token_price.ts
 import { Action } from "../types/action";
-import { SolanaAgentKit } from "../agent";
+import { SonicAgentKit } from "../agent";
 import { z } from "zod";
 import { fetch_token_price } from "../tools";
 
@@ -248,7 +248,7 @@ const fetchTokenPriceAction: Action = {
   schema: z.object({
     tokenSymbol: z.string().describe("The symbol of the token to fetch the price for"),
   }),
-  handler: async (agent: SolanaAgentKit, input: Record<string, any>) => {
+  handler: async (agent: SonicAgentKit, input: Record<string, any>) => {
     const price = await agent.getTokenPrice(input.tokenSymbol);
     return {
       status: "success",
@@ -262,9 +262,9 @@ const fetchTokenPriceAction: Action = {
 Then it can be used as such:
 
 ```typescript
-import { SolanaAgentKit } from "solana-agent-kit";
+import { SonicAgentKit } from "solana-agent-kit";
 
-const agent = new SolanaAgentKit(
+const agent = new SonicAgentKit(
   "your-wallet-private-key-as-base58",
   "https://api.mainnet-beta.solana.com",
   "your-openai-api-key"

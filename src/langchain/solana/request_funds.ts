@@ -1,22 +1,22 @@
 import { Tool } from "langchain/tools";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 
 export class SolanaRequestFundsTool extends Tool {
   name = "solana_request_funds";
   description = "Request SOL from Solana faucet (devnet/testnet only)";
 
-  constructor(private solanaKit: SolanaAgentKit) {
+  constructor(private sonicKit: SonicAgentKit) {
     super();
   }
 
   protected async _call(_input: string): Promise<string> {
     try {
-      await this.solanaKit.requestFaucetFunds();
+      await this.sonicKit.requestFaucetFunds();
 
       return JSON.stringify({
         status: "success",
         message: "Successfully requested faucet funds",
-        network: this.solanaKit.connection.rpcEndpoint.split("/")[2],
+        network: this.sonicKit.connection.rpcEndpoint.split("/")[2],
       });
     } catch (error: any) {
       return JSON.stringify({

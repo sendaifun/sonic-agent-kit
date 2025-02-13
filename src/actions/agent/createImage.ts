@@ -1,5 +1,5 @@
 import { Action } from "../../types/action";
-import { SolanaAgentKit } from "../../agent";
+import { SonicAgentKit } from "../../agent";
 import { z } from "zod";
 import { create_image } from "../../tools/agent";
 
@@ -57,7 +57,7 @@ const createImageAction: Action = {
       .default("natural")
       .describe("The style of the generated image"),
   }),
-  handler: async (agent: SolanaAgentKit, input: Record<string, any>) => {
+  handler: async (agent: SonicAgentKit, input: Record<string, any>) => {
     try {
       if (!agent.config.OPENAI_API_KEY) {
         return {

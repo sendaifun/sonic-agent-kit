@@ -1,8 +1,8 @@
-import { SolanaAgentKit } from "./agent";
-import { createSolanaTools } from "./langchain";
-import { createSolanaTools as createVercelAITools } from "./vercel-ai";
+import { SonicAgentKit } from "./agent";
+import { createSonicTools } from "./langchain";
+import { createSonicTools as createVercelAITools } from "./vercel-ai";
 
-export { SolanaAgentKit, createSolanaTools, createVercelAITools };
+export { SonicAgentKit, createSonicTools, createVercelAITools };
 
 // Optional: Export types that users might need
 export * from "./types";
