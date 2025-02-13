@@ -2,7 +2,7 @@
 
 # Sonic Agent Kit
 
-![Sonic Agent Kit Cover 1 (3)](https://github.com/user-attachments/assets/cfa380f6-79d9-474d-9852-3e1976c6de70)
+![Sonic Agent Kit Cover 1 (3)](https://i.imgur.com/Y9Ph6wE.png)
 
 ![NPM Downloads](https://img.shields.io/npm/dm/sonic-agent-kit?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/sendaifun/sonic-agent-kit?style=for-the-badge)
@@ -29,42 +29,12 @@ Anyone - whether an SF-based AI researcher or a crypto-native builder - can brin
   - Deploy SPL tokens by Metaplex
   - Transfer assets
   - Balance checks
-  - Stake SOL
-  - Zk compressed Airdrop by Light Protocol and Helius
-- **NFTs on 3.Land**
-  - Create your own collection
-  - NFT creation and automatic listing on 3.land
-  - List your NFT for sale in any SPL token
+
 - **NFT Management via Metaplex**
   - Collection deployment
   - NFT minting
   - Metadata management
   - Royalty configuration
-
-- **DeFi Integration**
-  - Jupiter Exchange swaps
-  - Launch on Pump via PumpPortal
-  - Raydium pool creation (CPMM, CLMM, AMMv4)
-  - Orca Whirlpool integration
-  - Manifest market creation, and limit orders
-  - Meteora Dynamic AMM, DLMM Pool, and Alpha Vault
-  - Openbook market creation
-  - Register and Resolve SNS
-  - Jito Bundles
-  - Pyth Price feeds for fetching Asset Prices
-  - Register/resolve Alldomains
-  - Perpetuals Trading with Adrena Protocol
-  - Drift Vaults, Perps, Lending and Borrowing
-  - Cross-chain bridging via deBridge DLN
-
-- **Solana Blinks**
-   - Lending by Lulo (Best APR for USDC)
-   - Send Arcade Games
-   - JupSOL staking
-   - Solayer SOL (sSOL)staking
-
-- **Non-Financial Actions**
-  - Gib Work for registering bounties
 
 ## 🤖 AI Integration Features
 
@@ -88,8 +58,6 @@ Anyone - whether an SF-based AI researcher or a crypto-native builder - can brin
 - **AI Tools**
   - DALL-E integration for NFT artwork generation
   - Natural language processing for blockchain commands
-  - Price feed integration for market analysis
-  - Automated decision-making capabilities
 
 ## 📦 Installation
 
