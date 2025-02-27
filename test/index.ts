@@ -1,5 +1,5 @@
 import { SonicAgentKit, ACTIONS } from "../src";
-import { createSolanaTools } from "../src/langchain";
+import { createSonicTools } from "../src/langchain";
 import { HumanMessage } from "@langchain/core/messages";
 import { MemorySaver } from "@langchain/langgraph";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
@@ -55,15 +55,13 @@ async function initializeAgent() {
       process.env.RPC_URL!,
       {
         OPENAI_API_KEY: process.env.OPENAI_API_KEY!,
-        HELIUS_API_KEY: process.env.HELIUS_API_KEY!,
-        PERPLEXITY_API_KEY: process.env.PERPLEXITY_API_KEY!,
       },
     );
 
-    const tools = createSolanaTools(solanaAgent);
+    const tools = createSonicTools(solanaAgent);
 
     const memory = new MemorySaver();
-    const config = { configurable: { thread_id: "Solana Agent Kit!" } };
+    const config = { configurable: { thread_id: "Sonic Agent Kit!" } };
 
     const agent = createReactAgent({
       llm,

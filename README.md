@@ -4,7 +4,7 @@
 
 ![Sonic Agent Kit Cover 1 (3)](https://i.imgur.com/Y9Ph6wE.png)
 
-![NPM Downloads](https://img.shields.io/npm/dm/sonic-agent-kit?style=for-the-badge)
+![NPM Downloads](https://img.shields.io/npm/dm/@sendaifun/sonic-agent-kit?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/sendaifun/sonic-agent-kit?style=for-the-badge)
 ![GitHub License](https://img.shields.io/github/license/sendaifun/sonic-agent-kit?style=for-the-badge)
 
@@ -62,13 +62,13 @@ Anyone - whether an SF-based AI researcher or a crypto-native builder - can brin
 ## 📦 Installation
 
 ```bash
-npm install sonic-agent-kit
+npm install @sendaifun/sonic-agent-kit
 ```
 
 ## Quick Start
 
 ```typescript
-import { SonicAgentKit, createSonicTools } from "sonic-agent-kit";
+import { SonicAgentKit, createSonicTools } from "@sendaifun/sonic-agent-kit";
 
 // Initialize with private key and optional RPC URL
 const agent = new SonicAgentKit(

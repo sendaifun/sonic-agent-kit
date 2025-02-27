@@ -39,7 +39,6 @@ async function runAutonomousMode(interval = 10) {
 		process.env.RPC_URL!,
 		{
 			OPENAI_API_KEY: process.env.OPENAI_API_KEY!,
-			COINGECKO_PRO_API_KEY: process.env.COINGECKO_PRO_API_KEY,
 		},
 	);
 
@@ -92,7 +91,6 @@ async function runChatMode() {
 		process.env.RPC_URL!,
 		{
 			OPENAI_API_KEY: process.env.OPENAI_API_KEY!,
-			COINGECKO_PRO_API_KEY: process.env.COINGECKO_PRO_API_KEY,
 		},
 	);
 
