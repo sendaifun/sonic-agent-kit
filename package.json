@@ -1,5 +1,5 @@
 {
-  "name": "sonic-agent-kit",
+  "name": "@sendaifun/sonic-agent-kit",
   "version": "1.0.0",
   "description": "connect any ai agents to sonic protocols",
   "main": "dist/index.js",
