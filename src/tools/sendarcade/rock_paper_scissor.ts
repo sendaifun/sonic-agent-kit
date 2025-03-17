@@ -8,7 +8,7 @@ export async function rock_paper_scissor(
 ) {
   try {
     const res = await fetch(
-      `https://rps.sendarcade.fun/api/actions/bot?amount=${amount}&choice=${choice}`,
+      `https://rps.sendarcade.fun/api/actions/sonic/bot?amount=${amount}&choice=${choice}`,
       {
         method: "POST",
         headers: {
@@ -50,7 +50,7 @@ async function outcome(
 ): Promise<string> {
   try {
     const res = await fetch(
-      "https://rps.sendarcade.fun" + href, // href = /api/actions/outcome?id=...
+      "https://rps.sendarcade.fun" + href, // href = /api/actions/sonic/outcome?id=...
       {
         method: "POST",
         headers: {
@@ -78,7 +78,7 @@ async function outcome(
 async function won(agent: SonicAgentKit, href: string): Promise<string> {
   try {
     const res = await fetch(
-      "https://rps.sendarcade.fun" + href, // href = /api/actions/won?id=...
+      "https://rps.sendarcade.fun" + href, // href = /api/actions/sonic/won?id=...
       {
         method: "POST",
         headers: {
@@ -110,7 +110,7 @@ async function won(agent: SonicAgentKit, href: string): Promise<string> {
 async function postWin(agent: SonicAgentKit, href: string): Promise<string> {
   try {
     const res = await fetch(
-      "https://rps.sendarcade.fun" + href, // href = /api/actions/postwin?id=...
+      "https://rps.sendarcade.fun" + href, // href = /api/actions/sonic/postwin?id=...
       {
         method: "POST",
         headers: {
