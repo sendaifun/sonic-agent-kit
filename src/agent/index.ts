@@ -51,7 +51,7 @@ export class SonicAgentKit {
     configOrKey: Config | string | null,
   ) {
     this.connection = new Connection(
-      rpc_url || "https://api.testnet.sonic.game",
+      rpc_url || "https://api.mainnet-alpha.sonic.game",
     );
     this.wallet = Keypair.fromSecretKey(bs58.decode(private_key));
     this.wallet_address = this.wallet.publicKey;

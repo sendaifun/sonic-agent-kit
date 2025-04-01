@@ -3,38 +3,71 @@ import { SonicAgentKit } from "../../agent";
 
 export class SolanaRockPaperScissorsTool extends Tool {
   name = "rock_paper_scissors";
-  description = `Play rock paper scissors to win SEND coins.
+  description = `Play rock paper scissors to win SOL coins.
 
-  Inputs (input is a JSON string):
-  choice: string, either "rock", "paper", or "scissors" (required)
-  amount: number, amount of SOL to play with - must be 0.1, 0.01, or 0.005 SOL (required)`;
+  Input should be either:
+  1. A JSON string with format: {"choice": "rock|paper|scissors", "amount": 0.001|0.05|0.1}
+  2. A natural language string containing:
+     - An amount in SOL (must be 0.001, 0.05, or 0.1 SOL)
+     - A choice (rock, paper, or scissors)
+
+  Example inputs:
+  - {"choice": "paper", "amount": 0.001}
+  - "Let's play with 0.001 SOL and I choose paper"`;
 
   constructor(private sonicKit: SonicAgentKit) {
     super();
   }
 
   private validateInput(input: any): void {
-    if (input.choice !== undefined) {
-      throw new Error("choice is required.");
+    if (!input || typeof input !== 'object') {
+      throw new Error("Input must be a valid object");
     }
-    if (
-      input.amount !== undefined &&
-      (typeof input.spaceKB !== "number" || input.spaceKB <= 0)
-    ) {
-      throw new Error("amount must be a positive number when provided");
+    if (!input.choice || typeof input.choice !== 'string') {
+      throw new Error("choice is required and must be a string");
+    }
+    if (!["rock", "paper", "scissors"].includes(input.choice.toLowerCase())) {
+      throw new Error("choice must be either 'rock', 'paper', or 'scissors'");
+    }
+    if (!input.amount || typeof input.amount !== 'number') {
+      throw new Error("amount is required and must be a number");
+    }
+    if (![0.1, 0.05, 0.001].includes(input.amount)) {
+      throw new Error("amount must be 0.1, 0.05, or 0.001 SOL");
     }
   }
 
   protected async _call(input: string): Promise<string> {
     try {
-      const parsedInput = JSON.parse(input);
+      let parsedInput;
+      try {
+        // First try to parse as JSON
+        parsedInput = JSON.parse(input);
+      } catch (e) {
+        // If JSON parsing fails, try to extract from natural language
+        const amountMatch = input.match(/(\d+\.?\d*)\s*SOL/);
+        const choiceMatch = input.match(/choose\s+(rock|paper|scissors)/i);
+        
+        if (!amountMatch || !choiceMatch) {
+          throw new Error("Input must contain both an amount in SOL (0.001, 0.05, or 0.1) and a choice (rock, paper, or scissors)");
+        }
+
+        const amount = parseFloat(amountMatch[1]);
+        if (![0.1, 0.05, 0.001].includes(amount)) {
+          throw new Error("Amount must be 0.001, 0.05, or 0.1 SOL");
+        }
+
+        parsedInput = {
+          amount: amount,
+          choice: choiceMatch[1].toLowerCase()
+        };
+      }
+
       this.validateInput(parsedInput);
+      
       const result = await this.sonicKit.rockPaperScissors(
-        Number(parsedInput['"amount"']),
-        parsedInput['"choice"'].replace(/^"|"$/g, "") as
-          | "rock"
-          | "paper"
-          | "scissors",
+        parsedInput.amount,
+        parsedInput.choice as "rock" | "paper" | "scissors"
       );
 
       return JSON.stringify({

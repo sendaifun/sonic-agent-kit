@@ -7,8 +7,9 @@ export async function rock_paper_scissor(
   choice: "rock" | "paper" | "scissors",
 ) {
   try {
+    // Initial game setup
     const res = await fetch(
-      `https://rps.sendarcade.fun/api/actions/sonic/bot?amount=${amount}&choice=${choice}`,
+      `https://rps.sendarcade.fun/api/actions/sonic/backend?amount=${amount}&choice=${choice}`,
       {
         method: "POST",
         headers: {
@@ -22,35 +23,39 @@ export async function rock_paper_scissor(
 
     const data = await res.json();
     if (data.transaction) {
-      const txn = Transaction.from(Buffer.from(data.transaction, "base64"));
-      txn.sign(agent.wallet);
-      txn.recentBlockhash = (
-        await agent.connection.getLatestBlockhash()
-      ).blockhash;
-      const sig = await sendAndConfirmTransaction(
-        agent.connection,
-        txn,
-        [agent.wallet],
-        { commitment: "confirmed" },
-      );
-      const href = data.links?.next?.href;
-      return await outcome(agent, sig, href);
+      try {
+        const txn = Transaction.from(Buffer.from(data.transaction, "base64"));
+        txn.sign(agent.wallet);
+        txn.recentBlockhash = (
+          await agent.connection.getLatestBlockhash()
+        ).blockhash;
+        const sig = await sendAndConfirmTransaction(
+          agent.connection,
+          txn,
+          [agent.wallet],
+          { commitment: "confirmed" },
+        );
+        return await outcome(agent, sig);
+      } catch (txnError: any) {
+        console.error("Transaction error:", txnError);
+        throw new Error(`Transaction failed: ${txnError.message}`);
+      }
     } else {
-      return "failed";
+      return "Failed to start game";
     }
   } catch (error: any) {
     console.error(error);
     throw new Error(`RPS game failed: ${error.message}`);
   }
 }
+
 async function outcome(
   agent: SonicAgentKit,
   sig: string,
-  href: string,
 ): Promise<string> {
   try {
     const res = await fetch(
-      "https://rps.sendarcade.fun" + href, // href = /api/actions/sonic/outcome?id=...
+      "https://rps.sendarcade.fun/api/actions/sonic/outcome",
       {
         method: "POST",
         headers: {
@@ -63,70 +68,34 @@ async function outcome(
       },
     );
 
-    const data: any = await res.json();
-    const title = data.title;
-    if (title.startsWith("You lost")) {
-      return title;
+    // Check if response is ok
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`API error: ${res.status} ${res.statusText} - ${text}`);
     }
-    const next_href = data.links?.actions?.[0]?.href;
-    return title + "\n" + (await won(agent, next_href));
-  } catch (error: any) {
-    console.error(error);
-    throw new Error(`RPS outcome failed: ${error.message}`);
-  }
-}
-async function won(agent: SonicAgentKit, href: string): Promise<string> {
-  try {
-    const res = await fetch(
-      "https://rps.sendarcade.fun" + href, // href = /api/actions/sonic/won?id=...
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          account: agent.wallet.publicKey.toBase58(),
-        }),
-      },
-    );
 
-    const data: any = await res.json();
-    if (data.transaction) {
-      const txn = Transaction.from(Buffer.from(data.transaction, "base64"));
-      txn.partialSign(agent.wallet);
-      await agent.connection.sendRawTransaction(txn.serialize(), {
-        preflightCommitment: "confirmed",
-      });
-    } else {
-      return "Failed to claim prize.";
+    // Try to parse as JSON
+    let data;
+    try {
+      data = await res.json();
+    } catch (e) {
+      const text = await res.text();
+      throw new Error(`Invalid JSON response: ${text}`);
     }
-    const next_href = data.links?.next?.href;
-    return await postWin(agent, next_href);
-  } catch (error: any) {
-    console.error(error);
-    throw new Error(`RPS outcome failed: ${error.message}`);
-  }
-}
-async function postWin(agent: SonicAgentKit, href: string): Promise<string> {
-  try {
-    const res = await fetch(
-      "https://rps.sendarcade.fun" + href, // href = /api/actions/sonic/postwin?id=...
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          account: agent.wallet.publicKey.toBase58(),
-        }),
-      },
-    );
 
-    const data: any = await res.json();
-    const title = data.title;
-    return "Prize claimed Successfully" + "\n" + title;
+    // Handle different outcomes based on API response format
+    if (data.type === "action") {
+      if (data.title && data.description) {
+        return `${data.title}\n${data.description}`;
+      }
+      return "Game completed but outcome details are missing";
+    } else if (data.error) {
+      throw new Error(`Game error: ${data.error}`);
+    }
+    
+    return "Unexpected response format";
   } catch (error: any) {
-    console.error(error);
+    console.error("Outcome error:", error);
     throw new Error(`RPS outcome failed: ${error.message}`);
   }
 }
