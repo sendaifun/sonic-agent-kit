@@ -37,8 +37,8 @@ describe("Chat Mode Testing", () => {
 
     // Check wallet balance
     const balance = await connection.getBalance(keypair.publicKey);
-    if (balance < LAMPORTS_PER_SOL * 0.001) {
-      console.warn(`Warning: Wallet has insufficient balance (${balance / LAMPORTS_PER_SOL} SOL). Need at least 0.001 SOL for tests.`);
+    if (balance < LAMPORTS_PER_SOL * 0.05) {
+      console.warn(`Warning: Wallet has insufficient balance (${balance / LAMPORTS_PER_SOL} SOL). Need at least 0.05 SOL for tests.`);
     }
 
     // Initialize the agent

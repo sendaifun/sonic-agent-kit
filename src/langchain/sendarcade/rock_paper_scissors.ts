@@ -6,14 +6,14 @@ export class SolanaRockPaperScissorsTool extends Tool {
   description = `Play rock paper scissors to win SOL coins.
 
   Input should be either:
-  1. A JSON string with format: {"choice": "rock|paper|scissors", "amount": 0.001|0.05|0.1}
+  1. A JSON string with format: {"choice": "rock|paper|scissors", "amount": 0.5|0.05|0.1}
   2. A natural language string containing:
-     - An amount in SOL (must be 0.001, 0.05, or 0.1 SOL)
+     - An amount in SOL (must be 0.5, 0.05, or 0.1 SOL)
      - A choice (rock, paper, or scissors)
 
   Example inputs:
-  - {"choice": "paper", "amount": 0.001}
-  - "Let's play with 0.001 SOL and I choose paper"`;
+  - {"choice": "paper", "amount": 0.05}
+  - "Let's play with 0.05 SOL and I choose paper"`;
 
   constructor(private sonicKit: SonicAgentKit) {
     super();
@@ -32,8 +32,8 @@ export class SolanaRockPaperScissorsTool extends Tool {
     if (!input.amount || typeof input.amount !== 'number') {
       throw new Error("amount is required and must be a number");
     }
-    if (![0.1, 0.05, 0.001].includes(input.amount)) {
-      throw new Error("amount must be 0.1, 0.05, or 0.001 SOL");
+    if (![0.1, 0.05, 0.5].includes(input.amount)) {
+      throw new Error("amount must be 0.1, 0.05, or 0.5 SOL");
     }
   }
 
@@ -49,12 +49,12 @@ export class SolanaRockPaperScissorsTool extends Tool {
         const choiceMatch = input.match(/choose\s+(rock|paper|scissors)/i);
         
         if (!amountMatch || !choiceMatch) {
-          throw new Error("Input must contain both an amount in SOL (0.001, 0.05, or 0.1) and a choice (rock, paper, or scissors)");
+          throw new Error("Input must contain both an amount in SOL (0.5, 0.05, or 0.1) and a choice (rock, paper, or scissors)");
         }
 
         const amount = parseFloat(amountMatch[1]);
-        if (![0.1, 0.05, 0.001].includes(amount)) {
-          throw new Error("Amount must be 0.001, 0.05, or 0.1 SOL");
+        if (![0.1, 0.05, 0.5].includes(amount)) {
+          throw new Error("Amount must be 0.5, 0.05, or 0.1 SOL");
         }
 
         parsedInput = {
