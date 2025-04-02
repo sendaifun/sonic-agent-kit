@@ -12,7 +12,7 @@ dotenv.config();
 
 function validateEnvironment(): void {
   const missingVars: string[] = [];
-  const requiredVars = ["OPENAI_API_KEY", "RPC_URL", "SOLANA_PRIVATE_KEY"];
+  const requiredVars = ["OPENAI_API_KEY", "RPC_URL", "SONIC_PRIVATE_KEY"];
 
   requiredVars.forEach((varName) => {
     if (!process.env[varName]) {
@@ -51,8 +51,8 @@ async function initializeAgent() {
     }
 
     const solanaAgent = new SonicAgentKit(
-      process.env.SOLANA_PRIVATE_KEY!,
-      process.env.RPC_URL!,
+      process.env.SONIC_PRIVATE_KEY!,
+      "https://api.mainnet-alpha.sonic.game",
       {
         OPENAI_API_KEY: process.env.OPENAI_API_KEY!,
       },

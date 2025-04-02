@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsc",
     "docs": "typedoc src --out docs",
-    "test": "tsx test/index.ts",
+    "test": "jest",
     "test:vercel-ai": "tsx test/agent_sdks/vercel_ai.ts",
     "generate": "tsx src/utils/keypair.ts",
     "lint": "eslint . --ext .ts",
@@ -19,7 +19,8 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "tool-summary": "tsx src/utils/analyzeTools.ts",
     "tool-summary:langchain": "tsx src/utils/analyzeTools.ts --langchain",
-    "check-tool-names:langchain": "tsx scripts/check-langchain-tool-duplicates.ts"
+    "check-tool-names:langchain": "tsx scripts/check-langchain-tool-duplicates.ts",
+    "test:watch": "jest --watch"
   },
   "engines": {
     "node": ">=22.0.0",
@@ -53,6 +54,7 @@
     "@solana/spl-token-metadata": "^0.1.6",
     "@solana/web3.js": "^1.98.0",
     "ai": "^4.0.22",
+    "axios": "^1.8.4",
     "bn.js": "^5.2.1",
     "bs58": "^6.0.0",
     "chai": "^5.1.2",
@@ -67,15 +69,18 @@
   "devDependencies": {
     "@types/bn.js": "^5.1.6",
     "@types/chai": "^5.0.1",
-    "@types/node": "^22.10.2",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.7",
     "@typescript-eslint/eslint-plugin": "^8.18.2",
     "@typescript-eslint/parser": "^8.18.2",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "husky": "^9.1.7",
+    "jest": "^29.7.0",
     "lint-staged": "^15.3.0",
     "prettier": "^3.4.2",
+    "ts-jest": "^29.3.1",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2"
   },
