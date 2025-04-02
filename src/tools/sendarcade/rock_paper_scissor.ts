@@ -35,7 +35,7 @@ export async function rock_paper_scissor(
           [agent.wallet],
           { commitment: "confirmed" },
         );
-        return await outcome(agent, sig, data.id);
+        return await outcome(agent, sig, data?.links?.next?.href);
       } catch (txnError: any) {
         console.error("Transaction error:", txnError);
         throw new Error(`Transaction failed: ${txnError.message}`);
@@ -52,11 +52,11 @@ export async function rock_paper_scissor(
 async function outcome(
   agent: SonicAgentKit,
   sig: string,
-  id: string,
+  href: string,
 ): Promise<string> {
   try {
     const res = await fetch(
-      `https://rps.sendarcade.fun/api/actions/sonic/outcome?id=${id}`,
+      `https://rps.sendarcade.fun` + href,
       {
         method: "POST",
         headers: {

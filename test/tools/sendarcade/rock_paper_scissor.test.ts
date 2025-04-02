@@ -1,6 +1,6 @@
 /// <reference types="jest" />
-import { SonicAgentKit } from "../../../agent";
-import { createSonicTools } from "../../../langchain";
+import { SonicAgentKit } from "../../../src/agent";
+import { createSonicTools } from "../../../src/langchain";
 import { HumanMessage } from "@langchain/core/messages";
 import { MemorySaver } from "@langchain/langgraph";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
