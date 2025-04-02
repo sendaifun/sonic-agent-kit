@@ -54,6 +54,7 @@
     "@solana/spl-token-metadata": "^0.1.6",
     "@solana/web3.js": "^1.98.0",
     "ai": "^4.0.22",
+    "axios": "^1.8.4",
     "bn.js": "^5.2.1",
     "bs58": "^6.0.0",
     "chai": "^5.1.2",
