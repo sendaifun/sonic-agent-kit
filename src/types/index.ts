@@ -82,3 +82,48 @@ export interface Action {
    */
   handler: Handler;
 }
+
+// Sega DEX Types
+export type SwapType = "swap-base-in" | "swap-base-out";
+
+export interface SegaSwapRoute {
+  poolId: string;
+  inputMint: string;
+  outputMint: string;
+  feeMint: string;
+  feeRate: number;
+  feeAmount: string;
+  remainingAccounts: string[];
+}
+
+export interface SegaSwapResponse {
+  swapType: string;
+  inputMint: string;
+  inputAmount: string;
+  outputMint: string;
+  outputAmount: string;
+  otherAmountThreshold: string;
+  slippageBps: number;
+  priceImpactPct: number;
+  referrerAmount: string;
+  routePlan: SegaSwapRoute[];
+}
+
+export interface SegaLeaderboardEntry {
+  wallet: string;
+  points: number;
+  swapVolume: number;
+  liquidityAdded: number;
+  rank: number;
+}
+
+export interface SegaLeaderboard {
+  rows: SegaLeaderboardEntry[];
+  me: SegaLeaderboardEntry | null;
+}
+
+export interface SegaSonicStats {
+  lpTimeWeightedVolume: number;
+  totalSwapAmountInUSD: number;
+  mySwapAmountInUSD: number;
+}
