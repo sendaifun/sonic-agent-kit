@@ -2,6 +2,7 @@ export * from "./solana";
 export * from "./agent";
 export * from "./metaplex";
 export * from "./sendarcade";
+export * from "./sega";
 
 import { SonicAgentKit } from "../agent";
 import {
@@ -18,6 +19,7 @@ import {
   SolanaCreateImageTool,
   SolanaGetWalletAddressTool,
 } from "./index";
+import { SegaSwapTool, SegaSwapQuoteTool } from "./sega";
 
 export function createSonicTools(sonicKit: SonicAgentKit) {
   return [
@@ -33,5 +35,7 @@ export function createSonicTools(sonicKit: SonicAgentKit) {
     new SolanaRequestFundsTool(sonicKit),
     new SolanaTPSCalculatorTool(sonicKit),
     new SolanaCloseEmptyTokenAccounts(sonicKit),
+    new SegaSwapTool(sonicKit),
+    new SegaSwapQuoteTool(sonicKit),
   ];
 }

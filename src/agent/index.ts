@@ -13,6 +13,8 @@ import {
   rock_paper_scissor,
   closeEmptyTokenAccounts,
   get_token_balance,
+  swap,
+  getSwapQuote,
 } from "../tools";
 import {
   Config,
@@ -140,5 +142,46 @@ export class SonicAgentKit {
     size: number;
   }> {
     return closeEmptyTokenAccounts(this);
+  }
+
+  async segaSwap(
+    inputMint: string | PublicKey,
+    outputMint: string | PublicKey,
+    amount: number,
+    slippageBps: number = DEFAULT_OPTIONS.SLIPPAGE_BPS,
+  ): Promise<{
+    signature: string;
+    inputAmount: number;
+    outputAmount: number;
+    inputMint: string;
+    outputMint: string;
+  }> {
+    // Convert PublicKey to string if needed
+    const inputMintStr =
+      inputMint instanceof PublicKey ? inputMint.toBase58() : inputMint;
+    const outputMintStr =
+      outputMint instanceof PublicKey ? outputMint.toBase58() : outputMint;
+
+    return swap(this, inputMintStr, outputMintStr, amount, slippageBps);
+  }
+
+  async getSegaSwapQuote(
+    inputMint: string | PublicKey,
+    outputMint: string | PublicKey,
+    amount: number,
+  ): Promise<{
+    inputAmount: number;
+    outputAmount: number;
+    priceImpactPct: number;
+    inputMint: string;
+    outputMint: string;
+  }> {
+    // Convert PublicKey to string if needed
+    const inputMintStr =
+      inputMint instanceof PublicKey ? inputMint.toBase58() : inputMint;
+    const outputMintStr =
+      outputMint instanceof PublicKey ? outputMint.toBase58() : outputMint;
+
+    return getSwapQuote(this, inputMintStr, outputMintStr, amount);
   }
 }

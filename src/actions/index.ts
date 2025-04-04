@@ -8,6 +8,7 @@ import requestFundsAction from "./solana/requestFunds";
 import getTPSAction from "./solana/getTPS";
 import createImageAction from "./agent/createImage";
 import getWalletAddressAction from "./agent/getWalletAddress";
+import { swapAction, swapQuoteAction } from "./sega";
 
 export const ACTIONS = {
   WALLET_ADDRESS_ACTION: getWalletAddressAction,
@@ -20,6 +21,8 @@ export const ACTIONS = {
   REQUEST_FUNDS_ACTION: requestFundsAction,
   GET_TPS_ACTION: getTPSAction,
   CREATE_IMAGE_ACTION: createImageAction,
+  SEGA_SWAP_ACTION: swapAction,
+  SEGA_SWAP_QUOTE_ACTION: swapQuoteAction,
 };
 
 export type { Action, ActionExample, Handler } from "../types/action";
